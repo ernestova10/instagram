@@ -80,4 +80,25 @@ class PostController extends Controller
  
          return back()->with('success', 'Comentario agregado correctamente');
      }
+
+    public function like(Post $post)
+    {
+         // Verifica si el usuario ya ha dado like
+         if (!$post->likes()->where('user_id', auth()->id())->exists()) {
+             $post->likes()->create([
+                 'user_id' => auth()->id()
+             ]);
+         }
+     
+         return redirect()->back(); // Redirige a la misma página
+     }
+     
+     public function unlike(Post $post)
+     {
+         // Buscar y eliminar el like del usuario autenticado
+         $post->likes()->where('user_id', auth()->id())->delete();
+     
+         return redirect()->back(); // Redirige a la misma página
+     }
+
 }

@@ -21,3 +21,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 Route::get('/home/comments/{postId}', [CommentController::class, 'index'])->name('comments.index');
 Route::post('/home/comments/{postId}', [CommentController::class, 'store'])->name('comments.store');
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
+Route::post('/posts/{post}/unlike', [PostController::class, 'unlike'])->name('posts.unlike');
+

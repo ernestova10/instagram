@@ -3,7 +3,7 @@
     border-radius: 8px;       /* Esquinas redondeadas */
     padding: 15px;            /* Espaciado interno */
     margin-bottom: 20px;      /* Separación entre posts */
-    background-color: #6d91d3; /* Fondo gris claro */
+    background-color: rgba(136, 138, 141, 0.7); /* Fondo gris claro */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para resaltar */
 }
 

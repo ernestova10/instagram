@@ -11,4 +11,12 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    css: {
+        preprocessorOptions: {
+            scss: {
+                // Para suprimir los warnings de Sass
+                quietDeps: true, // Esto desactiva los mensajes de advertencia para dependencias
+            },
+        },
+    },
 });
