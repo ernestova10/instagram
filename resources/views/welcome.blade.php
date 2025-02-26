@@ -10,7 +10,7 @@
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="text-center">
             <h1 class="mb-4">Bienvenido a Instagram</h1>
-            <a href="{{ route('login') }}" class="btn btn-primary mb-2">Login</a>
+            <a href="{{ route('login') }}" class="btn btn-primary mb-2">Iniciar Sesión</a>
             <a href="{{ route('register') }}" class="btn btn-primary mb-2">Registro</a>
         </div>
     </div>

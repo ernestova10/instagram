@@ -10,7 +10,7 @@
     <!-- Mostrar los posts -->
     @foreach ($posts as $post)
         <div class="post mb-4 text-center"> <!-- Centra el contenido dentro de cada post -->
-            <h3>{{ $post->title }}</h3>
+            <h3>{{ $nombre = $post->user->name }}</h3>
             <p>{{ $post->description }}</p>
 
             <!-- Imagen centrada -->
