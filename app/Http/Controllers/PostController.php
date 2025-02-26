@@ -57,4 +57,27 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('error', 'No puedes eliminar este post');
     }
+
+     // Método para mostrar un post con los comentarios
+     public function show($id)
+     {
+         $post = Post::with('comments.user')->findOrFail($id);
+         return view('posts.show', compact('post'));
+     }
+ 
+     // Método para crear un comentario
+     public function storeComment(Request $request, $postId)
+     {
+         $request->validate([
+             'comment' => 'required|string|max:500',
+         ]);
+ 
+         $comment = new Comment();
+         $comment->comment = $request->comment;
+         $comment->user_id = Auth::id();
+         $comment->post_id = $postId;
+         $comment->save();
+ 
+         return back()->with('success', 'Comentario agregado correctamente');
+     }
 }

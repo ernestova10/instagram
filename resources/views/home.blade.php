@@ -18,8 +18,27 @@
                 <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="Imagen del post" style="max-width: 300px; height: auto;">
             </div>
 
-            <p>{{ $post->n_likes }} likes</p>
-            <p>{{ $post->comments->count() }} comentarios</p>
+            <!-- Likes y Comentarios con un diseño más llamativo -->
+            <div class="post-stats mt-3 d-flex justify-content-center">
+                <!-- Likes -->
+                <div class="post-stat-item mr-4">
+                    <span class="badge bg-danger p-2">
+                        ❤️ {{ $post->n_likes }}
+                    </span>
+                    
+                </div>
+
+                <!-- Comentarios -->
+                <div class="post-stat-item ml-4">
+                    <span class="badge bg-info p-2">
+                        💬 {{ $post->comments->count() }}
+                    </span>
+                   
+                </div>
+            </div>
+
+            <!-- Emoticono de comentario que redirige a la página de comentarios -->
+            <a href="{{ route('comments.index', $post->id) }}" class="btn btn-info mt-3">Ver comentarios</a><br><br>
 
             <!-- Mostrar el botón de eliminar solo si el post pertenece al usuario autenticado -->
             @if ($post->user_id === auth()->id())
