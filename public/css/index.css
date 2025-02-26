@@ -1,0 +1,14 @@
+.post {
+    border: 1px solid #ddd;  /* Borde gris claro */
+    border-radius: 8px;       /* Esquinas redondeadas */
+    padding: 15px;            /* Espaciado interno */
+    margin-bottom: 20px;      /* Separación entre posts */
+    background-color: #6d91d3; /* Fondo gris claro */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para resaltar */
+}
+
+.post img {
+    max-width: 100%;   /* Asegura que la imagen no sobrepase el límite */
+    height: auto;      /* Mantiene las proporciones de la imagen */
+    border-radius: 5px; /* Redondea un poco las imágenes */
+}
