@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,4 +25,7 @@ Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->nam
 
 Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
 Route::post('/posts/{post}/unlike', [PostController::class, 'unlike'])->name('posts.unlike');
+
+
+Route::delete('/account/destroy', [UserController::class, 'destroy'])->name('account.destroy');
 

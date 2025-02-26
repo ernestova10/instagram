@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
-    
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -64,6 +64,16 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a class="dropdown-item text-danger" href="#" 
+                                    onclick="event.preventDefault(); confirmarEliminarCuenta();">
+                                        Eliminar cuenta
+                                    </a>
+
+                                    <!-- Formulario oculto para eliminar cuenta -->
+                                    <form id="delete-account-form" action="{{ route('account.destroy') }}" method="POST" class="d-none">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -80,5 +90,13 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        function confirmarEliminarCuenta() {
+            if (confirm("⚠️ ¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")) {
+                document.getElementById('delete-account-form').submit();
+            }
+        }
+    </script>
+
 </body>
 </html>
