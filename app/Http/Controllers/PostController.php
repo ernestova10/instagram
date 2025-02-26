@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Post;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class PostController extends Controller
+{
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
+    public function index() {
+        // Mostrar todos los posts, ordenados por fecha
+        $posts = Post::orderBy('publish_date', 'desc')->get();
+        return view('posts.index', compact('posts'));
+    }
+
+    public function create() {
+        return view('posts.create');
+    }
+
+    public function store(Request $request) {
+        // Validar la entrada
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,jfif,svg|max:2048',
+        ]);
+
+        // Subir la imagen si existe
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
+
+        // Crear el post
+        Post::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'publish_date' => now(),
+            'user_id' => Auth::id(),
+            'image' => $imagePath,
+        ]);
+
+        return redirect()->route('posts.index')->with('success', 'Post creado con éxito');
+    }
+
+    public function destroy(Post $post) {
+        // Verificar que el usuario sea el dueño del post
+        if ($post->user_id == Auth::id()) {
+            $post->delete();
+            return redirect()->route('posts.index')->with('success', 'Post eliminado con éxito');
+        }
+
+        return redirect()->route('posts.index')->with('error', 'No puedes eliminar este post');
+    }
+}
